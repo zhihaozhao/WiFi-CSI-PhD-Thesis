@@ -1,0 +1,65 @@
+# LaTeX generated files
+*.aux
+*.log
+*.out
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+*.acn
+*.glo
+*.ist
+*.acr
+*.alg
+*.glg
+*.gls
+*.idx
+*.ilg
+*.ind
+*.lol
+
+# Generated thesis PDF (keep separate versions)
+main.pdf
+thesis_draft_*.pdf
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.code-workspace
+
+# Archive and backup files
+*.zip
+*.tar.gz
+*.backup
+*.old
+
+# Defense presentation working files
+defense/draft_*.pptx
+defense/temp_*
+
+# Large media files (use external storage)
+figures/high_res_*.png
+figures/vector_*.ai
+figures/source_*.psd
+
+# University submission materials
+submission/draft_*.pdf
+submission/temp_*
+submission/committee_copy_*.pdf

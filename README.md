@@ -1,70 +1,24 @@
-# WiFi-CSI PhD Thesis Repository
+# Route-A Pipeline (Quick Start)
+- conda env create -f env.yml && conda activate csi-fall-route-a
+- python -m pip install torch --index-url https://download.pytorch.org/whl/cu121  # 根据GPU情况调整
+- bash scripts/make_all.sh
+Outputs:
+- plots/*.pdf
+- tables/*.tex
+- paper/main.pdf (compiled manuscript)
 
-This repository contains the LaTeX source files for the PhD dissertation on WiFi CSI sensing.
+## 运行约定
+- CPU=冒烟测试（验证链路与产物，不做长时间训练）；GPU=产出研究结果。
 
-## Thesis Structure
-
-**Title**: Deep Learning Approaches for Trustworthy WiFi Channel State Information Sensing: From Algorithm Design to Cross-Domain Validation
-
-### Chapters
-
-1. **Introduction** - Research background and motivation
-2. **Literature Review** - State-of-the-art in WiFi CSI sensing
-3. **Enhanced Model Architecture** - CNN+SE+Attention framework design
-4. **Calibration and Reliability** - Trustworthy evaluation methodologies  
-5. **Cross-Domain Generalization** - LOSO/LORO validation strategies
-6. **Sim2Real Label Efficiency** - Few-shot learning for domain adaptation
-7. **Experimental Validation** - Comprehensive benchmark evaluations
-8. **Conclusion and Future Work** - Summary and research directions
-
-## Repository Structure
-
-- `chapters/` - Individual chapter LaTeX files
-- `figures/` - Thesis figures and diagrams
-- `appendices/` - Supplementary materials
-- `main.tex` - Main thesis document
-- `refs.bib` - Bibliography
-- `formatting/` - University-specific formatting files
-- `defense/` - Defense presentation materials
-
-## Dependencies
-
-- LaTeX distribution (TeX Live/MiKTeX)
-- Required packages: `amsmath`, `graphicx`, `biblatex`, `hyperref`, etc.
-- University thesis template (if applicable)
-
-## Compilation
-
+### CPU 冒烟（约1–3分钟）
 ```bash
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
+REM Windows CMD
+sweep_local.bat
 ```
+该脚本仅运行一次轻量模型：生成 `results_cpu/smoke_cnn.json` 与对应 `.log`，用于验证：
+- 训练/验证/测试流程可跑通
+- 独立日志与结果 JSON 生成
+- 后续汇总脚本能正确读取
 
-## University Requirements
-
-- [ ] Follow university formatting guidelines
-- [ ] Include required front matter (abstract, acknowledgments, etc.)
-- [ ] Meet minimum page/word count requirements
-- [ ] Obtain supervisor approvals
-- [ ] Submit for committee review
-
-## Related Repositories
-
-- **Core Code**: WiFi-CSI-Sensing-Core (algorithms and scripts)
-- **Experimental Results**: WiFi-CSI-Sensing-Results (data and analysis)
-- **Journal Paper**: WiFi-CSI-Journal-Paper (publication materials)
-
-## Timeline
-
-- [ ] Chapter drafts completion
-- [ ] Internal review rounds
-- [ ] Supervisor approval
-- [ ] Committee submission
-- [ ] Defense preparation
-- [ ] Final submission
-
-## Notes
-
-This thesis incorporates and extends the work from the journal paper submissions and builds upon the experimental framework developed in the core repository.
+### GPU 实验
+使用 `sweep.bat`（已默认启用 AMP、保存 final 模型、降低验证频率）。所有 GPU 结果输出到 `results_gpu/`，便于与 CPU 冒烟区分。
